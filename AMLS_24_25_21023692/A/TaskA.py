@@ -1,17 +1,17 @@
 # Python Script for Task A
 # Import the data from the medmnist for task A
-import medmnist
-from medmnist import INFO
+from medmnist import BreastMNIST
 
 
 # Load BreastMNIST dataset
 def load_data():
-    info = INFO['breastmnist']
-    DataClass = getattr(medmnist, info['python_class'])
+    train_data = BreastMNIST(split='train', download=True, size=224)
+    val_data = BreastMNIST(split='val', download=True, size=224)
+    test_data = BreastMNIST(split='test', download=True, size=224)
 
-    train_data = DataClass(split='train', download=True)
-    val_data = DataClass(split='val', download=True)
-    test_data = DataClass(split='test', download=True)
+    x_train, y_train = train_data.imgs, train_data.labels
+    x_val, y_val = val_data.imgs, val_data.labels
+    x_test, y_test = test_data.imgs, test_data.labels
 
     print(test_data)
     print(val_data)
