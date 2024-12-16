@@ -1,20 +1,23 @@
 # Python Script for Task B
 # Import the data from the medmnist for task B
-import medmnist
-from medmnist import INFO
+from medmnist import BloodMNIST
 
 
-# Load BreastMNIST dataset
+# Load BloodMNIST dataset
 def load_data():
-    info = INFO["bloodmnist"]
-    DataClass = getattr(medmnist, info['python_class'])
+    train_data = BloodMNIST(split='train', download=True, size=224)
+    val_data = BloodMNIST(split='val', download=True, size=224)
+    test_data = BloodMNIST(split='test', download=True, size=224)
 
-    train_data = DataClass(split='train', download=True)
-    val_data = DataClass(split='val', download=True)
-    test_data = DataClass(split='test', download=True)
+    x_train, y_train = train_data.imgs, train_data.labels
+    x_val, y_val = val_data.imgs, val_data.labels
+    x_test, y_test = test_data.imgs, test_data.labels
 
     print(test_data)
     print(val_data)
     print(train_data)
+
+
+load_data()
 
 # CNN Model can be used for Task B
