@@ -17,4 +17,7 @@ def load_data():
     print(val_data)
     print(train_data)
 
+
+load_data()
+
 # CNN Model can be used for Task A
