@@ -1,6 +1,9 @@
 # Python Script for Task A
 # Import the data from the medmnist for task A
 from medmnist import BreastMNIST
+import matplotlib.pyplot as plt
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.utils import to_categorical
 
 
@@ -22,6 +25,26 @@ def load_data():
     print(train_data)
 
     return (x_train, y_train), (x_test, y_test)
+
+
+def build_model():
+    model = Sequential([
+        Conv2D(32, (5, 5), activation='relu', input_shape=(224, 224, 1)),
+        MaxPooling2D((2, 2)),
+        Conv2D(64, (3, 3), activation='relu'),
+        MaxPooling2D((2, 2)),
+        Conv2D(64, (3, 3), activation='relu'),
+        MaxPooling2D((2, 2)),
+        Flatten(),
+        Dense(64, activation='relu'),
+        Dropout(0.5),
+        Dense(2, activation='softmax')
+    ])
+
+    model.compile(optimizer='adam',
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy'])
+    return model
 
 
 load_data()
