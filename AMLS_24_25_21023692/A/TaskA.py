@@ -1,5 +1,4 @@
-# Python Script for Task A
-# Import the data from the medmnist for task A
+# Python Script for Task A (CNN)
 from medmnist import BreastMNIST
 import matplotlib.pyplot as plt
 from tensorflow.keras.models import Sequential
@@ -56,6 +55,14 @@ def train_model(model, x_train, y_train, x_val, y_val):
     )
     return history
 
-load_data()
 
-# CNN Model can be used for Task A
+# Plot training history
+def plot_training_history(history):
+    plt.plot(history.history['accuracy'], label='accuracy')
+    plt.plot(history.history['val_accuracy'], label='val_accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.ylim([0, 1])
+    plt.legend(loc='lower right')
+    plt.show()
+
