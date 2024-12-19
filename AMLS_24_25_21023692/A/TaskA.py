@@ -47,6 +47,16 @@ def build_model():
     return model
 
 
+# Train the model
+def train_model(model, x_train, y_train, x_val, y_val):
+    history = model.fit(
+        x_train, y_train,
+        validation_data=(x_val, y_val),
+        epochs=50,
+        batch_size=32
+    )
+    return history
+
 load_data()
 
 # CNN Model can be used for Task A
