@@ -8,11 +8,12 @@ from tensorflow.keras.utils import to_categorical
 
 # Load BreastMNIST dataset
 def load_data():
-    # Load training, validation, and test data
+    # Load BreastMNIST training, validation, and test datasets
     train_data = BreastMNIST(split='train', download=True, size=224)
     val_data = BreastMNIST(split='val', download=True, size=224)
     test_data = BreastMNIST(split='test', download=True, size=224)
 
+    # Get the images and labels
     x_train, y_train = train_data.imgs, train_data.labels
     x_val, y_val = val_data.imgs, val_data.labels
     x_test, y_test = test_data.imgs, test_data.labels
