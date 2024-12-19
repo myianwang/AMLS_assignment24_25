@@ -23,7 +23,7 @@ def load_data():
     y_val = to_categorical(y_val, num_classes=2)
     y_test = to_categorical(y_test, num_classes=2)
 
-    return (x_train, y_train), (x_val, y_val), (x_test, y_test)
+    return x_train, y_train, x_val, y_val, x_test, y_test
 
 
 def build_model():
