@@ -9,6 +9,7 @@ from tensorflow.keras.utils import to_categorical
 
 # Load BreastMNIST dataset
 def load_data():
+    # Load training, validation, and test data
     train_data = BreastMNIST(split='train', download=True, size=224)
     val_data = BreastMNIST(split='val', download=True, size=224)
     test_data = BreastMNIST(split='test', download=True, size=224)
@@ -17,14 +18,12 @@ def load_data():
     x_val, y_val = val_data.imgs, val_data.labels
     x_test, y_test = test_data.imgs, test_data.labels
 
+    # One-hot encode the labels
     y_train = to_categorical(y_train, num_classes=2)
+    y_val = to_categorical(y_val, num_classes=2)
     y_test = to_categorical(y_test, num_classes=2)
 
-    print(test_data)
-    print(val_data)
-    print(train_data)
-
-    return (x_train, y_train), (x_test, y_test)
+    return (x_train, y_train), (x_val, y_val), (x_test, y_test)
 
 
 def build_model():
