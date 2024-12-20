@@ -69,6 +69,7 @@ def plot_training_history(history):
 
 
 def main():
+    # Load the data
     x_train, y_train, x_val, y_val, x_test, y_test = load_data()
 
     # Build and compile CNN model
