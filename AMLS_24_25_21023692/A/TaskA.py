@@ -5,8 +5,17 @@ from tensorflow.keras.utils import to_categorical
 from medmnist import BreastMNIST
 
 
-# Load BreastMNIST dataset
 def load_data():
+    """
+    Load the BreastMNIST dataset and preprocess the data.
+    :return x_train: training images
+    :return y_train: training labels
+    :return x_val: validation images
+    :return y_val: validation labels
+    :return x_test: test images
+    :return y_test: test labels
+    """
+
     # Load BreastMNIST training, validation, and test datasets
     train_data = BreastMNIST(split='train', download=True, size=224)
     val_data = BreastMNIST(split='val', download=True, size=224)
@@ -25,8 +34,13 @@ def load_data():
     return x_train, y_train, x_val, y_val, x_test, y_test
 
 
-# Build the CNN model
 def build_model():
+    """
+    Build a Convolutional Neural Network (CNN) model.
+    :return model: CNN model
+    """
+
+    # Define the CNN model
     model = Sequential([
         Conv2D(32, (5, 5), activation='relu', input_shape=(224, 224, 1)),
         MaxPooling2D((2, 2)),
@@ -40,25 +54,43 @@ def build_model():
         Dense(2, activation='softmax')
     ])
 
+    # Compile the model
     model.compile(optimizer='adam',
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])
+
     return model
 
 
-# Train the model
 def train_model(model, x_train, y_train, x_val, y_val):
+    """
+    Train the CNN model on the training data.
+    :param model: CNN model
+    :param x_train: training images
+    :param y_train: training labels
+    :param x_val: validation images
+    :param y_val: validation labels
+    :return history: training history
+    """
+
+    # Train the model
     history = model.fit(
         x_train, y_train,
         validation_data=(x_val, y_val),
         epochs=50,
         batch_size=32
     )
+
     return history
 
 
-# Plot training history
 def plot_training_history(history):
+    """
+    Plot the training history of the CNN model.
+    :param history: training history
+    """
+
+    # Plot the training history
     plt.plot(history.history['accuracy'], label='accuracy')
     plt.plot(history.history['val_accuracy'], label='val_accuracy')
     plt.xlabel('Epoch')
@@ -69,6 +101,10 @@ def plot_training_history(history):
 
 
 def main():
+    """
+    Main function to load data, build, train and evaluate the CNN model.
+    """
+
     # Load the data
     x_train, y_train, x_val, y_val, x_test, y_test = load_data()
 
