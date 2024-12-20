@@ -1,4 +1,3 @@
-# Python Script for Task A (CNN)
 import matplotlib.pyplot as plt
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
@@ -68,3 +67,23 @@ def plot_training_history(history):
     plt.legend(loc='lower right')
     plt.show()
 
+
+def main():
+    x_train, y_train, x_val, y_val, x_test, y_test = load_data()
+
+    # Build and compile CNN model
+    model = build_model()
+
+    # Train the model
+    history = train_model(model, x_train, y_train, x_val, y_val)
+
+    # Evaluate the model
+    test_loss, test_acc = model.evaluate(x_test, y_test, verbose=2)
+    print(f'Test accuracy: {test_acc}')
+
+    # Plot training history
+    plot_training_history(history)
+
+
+if __name__ == "__main__":
+    main()
