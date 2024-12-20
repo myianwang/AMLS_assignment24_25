@@ -1,9 +1,9 @@
 # Python Script for Task A (CNN)
-from medmnist import BreastMNIST
 import matplotlib.pyplot as plt
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.utils import to_categorical
+from medmnist import BreastMNIST
 
 
 # Load BreastMNIST dataset
@@ -26,6 +26,7 @@ def load_data():
     return x_train, y_train, x_val, y_val, x_test, y_test
 
 
+# Build the CNN model
 def build_model():
     model = Sequential([
         Conv2D(32, (5, 5), activation='relu', input_shape=(224, 224, 1)),
