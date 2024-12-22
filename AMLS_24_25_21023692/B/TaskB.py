@@ -33,4 +33,24 @@ def load_data():
 
     return x_train, y_train, x_val, y_val, x_test, y_test
 
-# CNN Model can be used for Task B
+
+def build_model():
+    """
+    Build a Convolutional Neural Network (CNN) model.
+    :return model: CNN model
+    """
+    model = Sequential([
+        Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 3)),
+        MaxPooling2D((2, 2)),
+        Conv2D(64, (3, 3), activation='relu'),
+        MaxPooling2D((2, 2)),
+        Flatten(),
+        Dense(128, activation='relu'),
+        Dropout(0.5),
+        Dense(8, activation='softmax')
+    ])
+
+    model.compile(optimizer='adam',
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy'])
+    return model
