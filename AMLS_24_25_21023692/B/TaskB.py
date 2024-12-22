@@ -54,3 +54,23 @@ def build_model():
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])
     return model
+
+
+# Train the model
+def train_model(model, x_train, y_train, x_val, y_val):
+    """
+    Train the CNN model.
+    :param model: CNN model
+    :param x_train: training images
+    :param y_train: training labels
+    :param x_val: validation images
+    :param y_val: validation labels
+    :returnhistory: training history
+    """
+    history = model.fit(
+        x_train, y_train,
+        validation_data=(x_val, y_val),
+        epochs=50,
+        batch_size=32
+    )
+    return history
