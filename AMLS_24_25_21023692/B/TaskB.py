@@ -74,3 +74,18 @@ def train_model(model, x_train, y_train, x_val, y_val):
         batch_size=32
     )
     return history
+
+
+# Plot training history
+def plot_training_history(history):
+    """
+    Plot the training history of the CNN model.
+    :param history: training history
+    """
+    plt.plot(history.history['accuracy'], label='accuracy')
+    plt.plot(history.history['val_accuracy'], label='val_accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.ylim([0, 1])
+    plt.legend(loc='lower right')
+    plt.show()
