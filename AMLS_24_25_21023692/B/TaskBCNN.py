@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.utils import to_categorical
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from medmnist import BloodMNIST
 
 
@@ -84,10 +85,25 @@ def plot_training_history(history):
     """
     plt.plot(history.history['accuracy'], label='accuracy')
     plt.plot(history.history['val_accuracy'], label='val_accuracy')
+    plt.title('Task B (CNN): Training History')
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy')
     plt.ylim([0, 1])
     plt.legend(loc='lower right')
+    plt.grid()
+    plt.show()
+
+
+def plot_confusion_matrix(y_true, y_pred):
+    """
+    Plot the confusion matrix for a given set of true and predicted labels.
+    :param y_true: True labels
+    :param y_pred: Predicted labels
+    """
+    # Plot confusion matrix for CNN
+    cm = confusion_matrix(y_true, y_pred)
+    ConfusionMatrixDisplay(cm, display_labels=["Benign", "Malignant"]).plot()
+    plt.title("Task B (CNN): Confusion Matrix")
     plt.show()
 
 
@@ -111,6 +127,9 @@ def main():
 
     # Plot training history
     plot_training_history(history)
+
+    # Plot confusion matrix
+    plot_confusion_matrix(y_test.argmax(axis=1), model.predict(x_test).argmax(axis=1))
 
 
 if __name__ == "__main__":
