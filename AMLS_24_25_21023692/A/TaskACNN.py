@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.utils import to_categorical
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from medmnist import BreastMNIST
 
 
@@ -17,9 +18,9 @@ def load_data():
     """
 
     # Load BreastMNIST training, validation, and test datasets
-    train_data = BreastMNIST(split='train', download=True, size=224)
-    val_data = BreastMNIST(split='val', download=True, size=224)
-    test_data = BreastMNIST(split='test', download=True, size=224)
+    train_data = BreastMNIST(split='train', download=True, size=28)
+    val_data = BreastMNIST(split='val', download=True, size=28)
+    test_data = BreastMNIST(split='test', download=True, size=28)
 
     # Get the images and labels
     x_train, y_train = train_data.imgs, train_data.labels
@@ -42,7 +43,7 @@ def build_model():
 
     # Define the CNN model
     model = Sequential([
-        Conv2D(32, (5, 5), activation='relu', input_shape=(224, 224, 1)),
+        Conv2D(32, (5, 5), activation='relu', input_shape=(28, 28, 1)),
         MaxPooling2D((2, 2)),
         Conv2D(64, (3, 3), activation='relu'),
         MaxPooling2D((2, 2)),
@@ -93,10 +94,25 @@ def plot_training_history(history):
     # Plot the training history
     plt.plot(history.history['accuracy'], label='accuracy')
     plt.plot(history.history['val_accuracy'], label='val_accuracy')
+    plt.title('Task A (CNN): Training History')
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy')
     plt.ylim([0, 1])
     plt.legend(loc='lower right')
+    plt.grid()
+    plt.show()
+
+
+def plot_confusion_matrix(y_true, y_pred):
+    """
+    Plot the confusion matrix for CNN model.
+    :param y_true: True labels
+    :param y_pred: Predicted labels
+    """
+    # Plot confusion matrix for CNN
+    cm = confusion_matrix(y_true, y_pred)
+    ConfusionMatrixDisplay(cm, display_labels=["Benign", "Malignant"]).plot()
+    plt.title("Task A (CNN): Confusion Matrix")
     plt.show()
 
 
@@ -120,6 +136,9 @@ def main():
 
     # Plot training history
     plot_training_history(history)
+
+    # Plot confusion matrix
+    plot_confusion_matrix(y_test.argmax(axis=1), model.predict(x_test).argmax(axis=1))
 
 
 if __name__ == "__main__":
