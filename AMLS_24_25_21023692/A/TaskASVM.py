@@ -1,5 +1,5 @@
-# SVM Model
 from medmnist import BreastMNIST
+from sklearn.preprocessing import StandardScaler
 
 
 def load_data():
@@ -21,3 +21,28 @@ def load_data():
     x_test, y_test = test_data.imgs, test_data.labels.ravel()
 
     return x_train, y_train, x_val, y_val, x_test, y_test
+
+
+def preprocess_data(x_train, x_val, x_test):
+    """
+    Preprocess the data by reshaping the images and standardizing the data.
+    :param x_train: training images
+    :param x_val: validation images
+    :param x_test: test images
+    :return x_train_prepared: prepared training images
+    :return x_val_prepared: prepared validation images
+    :return x_test_prepared: prepared test images
+    """
+
+    # Reshape the images
+    x_train_prepared = x_train.reshape(len(x_train), -1)
+    x_val_prepared = x_val.reshape(len(x_val), -1)
+    x_test_prepared = x_test.reshape(len(x_test), -1)
+
+    # Standardize the data
+    scaler = StandardScaler()
+    x_train_prepared = scaler.fit_transform(x_train_prepared)
+    x_val_prepared = scaler.transform(x_val_prepared)
+    x_test_prepared = scaler.transform(x_test_prepared)
+
+    return x_train_prepared, x_val_prepared, x_test_prepared
