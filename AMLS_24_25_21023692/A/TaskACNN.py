@@ -57,7 +57,7 @@ def build_model():
 
     # Compile the model
     model.compile(optimizer='adam',
-                  loss='categorical_crossentropy',
+                  loss='binary_crossentropy',
                   metrics=['accuracy'])
 
     return model
@@ -109,6 +109,7 @@ def plot_confusion_matrix(y_true, y_pred):
     :param y_true: True labels
     :param y_pred: Predicted labels
     """
+
     # Plot confusion matrix for CNN
     cm = confusion_matrix(y_true, y_pred)
     ConfusionMatrixDisplay(cm, display_labels=["Benign", "Malignant"]).plot()
