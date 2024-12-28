@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from medmnist import BreastMNIST
 
@@ -74,12 +75,21 @@ def train_model(model, x_train, y_train, x_val, y_val):
     :return history: training history
     """
 
+    # Define early stopping callback
+    early_stopping = EarlyStopping(
+        monitor='val_loss',
+        patience=20,
+        restore_best_weights=True,
+        verbose=1
+    )
+
     # Train the model
     history = model.fit(
         x_train, y_train,
         validation_data=(x_val, y_val),
-        epochs=50,
-        batch_size=32
+        epochs=100,
+        batch_size=32,
+        callbacks=[early_stopping]
     )
 
     return history
@@ -111,6 +121,10 @@ def plot_confusion_matrix(y_true, y_pred):
     """
 
     # Plot confusion matrix for CNN
+    cm = confusion_matrix(y_true, y_pred, normalize='true')
+    ConfusionMatrixDisplay(cm, display_labels=["Benign", "Malignant"]).plot()
+    plt.title("Task A (CNN): Confusion Matrix (Normalized)")
+    plt.show()
     cm = confusion_matrix(y_true, y_pred)
     ConfusionMatrixDisplay(cm, display_labels=["Benign", "Malignant"]).plot()
     plt.title("Task A (CNN): Confusion Matrix")
@@ -140,6 +154,26 @@ def main():
 
     # Plot confusion matrix
     plot_confusion_matrix(y_test.argmax(axis=1), model.predict(x_test).argmax(axis=1))
+
+    return test_acc
+
+
+def average_main(run_number):
+    """
+    Run main function multiple times and calculate the average accuracy.
+    :param run_number: number of times to run the main function
+    """
+
+    # List to store accuracy values
+    accuracy_list = []
+
+    # Run the main function multiple times
+    for i in range(0, run_number):
+        accuracy_list.append(main())
+
+    # Print the average accuracy and the list of accuracy values
+    print("Average Accuracy:", sum(accuracy_list) / run_number)
+    print("Accuracy List:", accuracy_list)
 
 
 if __name__ == "__main__":
