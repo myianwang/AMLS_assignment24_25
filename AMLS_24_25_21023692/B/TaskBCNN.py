@@ -68,11 +68,22 @@ def train_model(model, x_train, y_train, x_val, y_val):
     :param y_val: validation labels
     :returnhistory: training history
     """
+
+    # Define early stopping callback
+    early_stopping = EarlyStopping(
+        monitor='val_loss',
+        patience=25,
+        restore_best_weights=True,
+        verbose=1
+    )
+
+    # Train the model
     history = model.fit(
         x_train, y_train,
         validation_data=(x_val, y_val),
-        epochs=50,
-        batch_size=32
+        epochs=100,
+        batch_size=32,
+        callbacks=[early_stopping]
     )
     return history
 
