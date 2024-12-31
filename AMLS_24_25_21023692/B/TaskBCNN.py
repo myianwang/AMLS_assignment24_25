@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from medmnist import BloodMNIST
 
@@ -111,9 +112,14 @@ def plot_confusion_matrix(y_true, y_pred):
     :param y_true: True labels
     :param y_pred: Predicted labels
     """
+
     # Plot confusion matrix for CNN
+    cm = confusion_matrix(y_true, y_pred, normalize='true')
+    ConfusionMatrixDisplay(cm, display_labels=[str(i) for i in range(8)]).plot()
+    plt.title("Task B (CNN): Confusion Matrix (Normalized)")
+    plt.show()
     cm = confusion_matrix(y_true, y_pred)
-    ConfusionMatrixDisplay(cm, display_labels=["Benign", "Malignant"]).plot()
+    ConfusionMatrixDisplay(cm, display_labels=[str(i) for i in range(8)]).plot()
     plt.title("Task B (CNN): Confusion Matrix")
     plt.show()
 
