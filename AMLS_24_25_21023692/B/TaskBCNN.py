@@ -129,7 +129,6 @@ def main():
     """
     Main function to load data, build, train and evaluate the CNN model.
     """
-
     # Load the data
     x_train, y_train, x_val, y_val, x_test, y_test = load_data()
 
@@ -148,6 +147,26 @@ def main():
 
     # Plot confusion matrix
     plot_confusion_matrix(y_test.argmax(axis=1), model.predict(x_test).argmax(axis=1))
+
+    return test_acc
+
+
+def average_main(run_number):
+    """
+    Run main function multiple times and calculate the average accuracy.
+    :param run_number: number of times to run the main function
+    """
+
+    # List to store accuracy values
+    accuracy_list = []
+
+    # Run the main function multiple times
+    for i in range(0, run_number):
+        accuracy_list.append(main())
+
+    # Print the average accuracy and the list of accuracy values
+    print("Average Accuracy:", sum(accuracy_list) / run_number)
+    print("Accuracy List:", accuracy_list)
 
 
 if __name__ == "__main__":
