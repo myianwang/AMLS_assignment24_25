@@ -96,3 +96,31 @@ def train_svm_and_plot(x_train, y_train, x_val, y_val):
     plt.show()
 
     return best_svm
+
+
+def evaluate_on_test(best_svm, x_test, y_test):
+    """
+    Evaluate the best SVM model on the test set and plot the confusion matrix.
+    :param best_svm: trained SVM model
+    :param x_test: test images
+    :param y_test: test labels
+    """
+
+    # Test the model on the test set
+    test_preds = best_svm.predict(x_test)
+    test_accuracy = accuracy_score(y_test, test_preds)
+
+    print("\nTest Accuracy:", test_accuracy)
+    print("Test Classification Report:\n", classification_report(y_test, test_preds))
+
+    # Plot confusion matrix for test set
+    cm = confusion_matrix(y_test, test_preds)
+    ConfusionMatrixDisplay(cm, display_labels=["Benign", "Malignant"]).plot()
+    plt.title("Task A (SVM): Confusion Matrix for Test Set")
+    plt.show()
+
+    # Plot confusion matrix for test set
+    cm = confusion_matrix(y_test, test_preds, normalize='true')
+    ConfusionMatrixDisplay(cm, display_labels=["Benign", "Malignant"]).plot()
+    plt.title("Task A (SVM): Confusion Matrix for Test Set (Normalized)")
+    plt.show()
