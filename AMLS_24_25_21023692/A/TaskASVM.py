@@ -124,3 +124,25 @@ def evaluate_on_test(best_svm, x_test, y_test):
     ConfusionMatrixDisplay(cm, display_labels=["Benign", "Malignant"]).plot()
     plt.title("Task A (SVM): Confusion Matrix for Test Set (Normalized)")
     plt.show()
+
+
+def main():
+    """
+    Main function to load data, preprocess, train and evaluate the SVM model.
+    """
+
+    # Load BreastMNIST dataset
+    x_train, y_train, x_val, y_val, x_test, y_test = load_data()
+
+    # Preprocess data
+    x_train_prepared, x_val_prepared, x_test_prepared = preprocess_data(x_train, x_val, x_test)
+
+    # Train SVM model and plot confusion matrix for validation set
+    best_svm = train_svm_and_plot(x_train_prepared, y_train, x_val_prepared, y_val)
+
+    # Evaluate the best model on the test set
+    evaluate_on_test(best_svm, x_test_prepared, y_test)
+
+
+if __name__ == "__main__":
+    main()
