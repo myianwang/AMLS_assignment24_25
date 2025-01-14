@@ -97,3 +97,51 @@ def train_svm_and_evaluate(x_train, y_train, x_val, y_val):
     plt.show()
 
     return best_svm
+
+
+def evaluate_on_test(best_svm, x_test, y_test):
+    """
+    Evaluate the best SVM model on the test set.
+    :param best_svm: best SVM model
+    :param x_test: test images
+    :param y_test: test labels
+    """
+
+    # Evaluate the model on the test set
+    test_preds = best_svm.predict(x_test)
+    test_accuracy = accuracy_score(y_test, test_preds)
+
+    print("\nTest Accuracy:", test_accuracy)
+    print("\nTest Classification Report:\n", classification_report(y_test, test_preds))
+
+    # Plot confusion matrix for test set
+    cm = confusion_matrix(y_test, test_preds)
+    ConfusionMatrixDisplay(cm, display_labels=[str(i) for i in range(8)]).plot()
+    plt.title("Task B (SVM):Test Confusion Matrix")
+    plt.show()
+    cm = confusion_matrix(y_test, test_preds, normalize='true')
+    ConfusionMatrixDisplay(cm, display_labels=[str(i) for i in range(8)]).plot()
+    plt.title("Task B (SVM):Test Confusion Matrix (Normalized)")
+    plt.show()
+
+
+def main():
+    """
+    Main function to load data, preprocess, train and evaluate the SVM model.
+    """
+
+    # Load BloodMNIST dataset
+    x_train, y_train, x_val, y_val, x_test, y_test = load_data()
+
+    # Preprocess the data
+    x_train_prepared, x_val_prepared, x_test_prepared = preprocess_data(x_train, x_val, x_test)
+
+    # Train SVM and evaluate on the validation set
+    best_svm = train_svm_and_evaluate(x_train_prepared, y_train, x_val_prepared, y_val)
+
+    # Evaluate the best model on the test set
+    evaluate_on_test(best_svm, x_test_prepared, y_test)
+
+
+if __name__ == "__main__":
+    main()
