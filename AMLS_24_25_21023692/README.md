@@ -25,5 +25,4 @@ python main.py
 - scikit-learn
 - medmnist
 - matplotlib
-- numpy
 
