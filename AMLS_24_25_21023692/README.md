@@ -14,15 +14,16 @@ This project is the Applied Machine Learning Systems (AMLS) assignment, which fo
 - `README.md`: Overview, setup instructions, and file descriptions.
 
 ## Setup Instructions
-1. Install the required packages.
-2. Execute the project:
+1. Create and activate a virtual environment.
+2. Install the required packages.
+3. Execute the project by running the following command:
 ```bash
 python main.py
 ```
+4. The output will be displayed in the terminal and matplotlib plots.
 
 ## Packages Required
 - tensorflow
 - scikit-learn
 - medmnist
 - matplotlib
-
