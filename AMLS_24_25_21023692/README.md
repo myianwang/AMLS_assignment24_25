@@ -16,11 +16,12 @@ This project is the Applied Machine Learning Systems (AMLS) assignment, which fo
 ## Setup Instructions
 1. Create and activate a virtual environment.
 2. Install the required packages.
-3. Execute the project by running the following command:
+3. Move to the project directory of main.py (AMLS_24_25_21023692).
+4. Execute the project by running the following command:
 ```bash
 python main.py
 ```
-4. The output will be displayed in the terminal and matplotlib plots.
+5. The output will be displayed in the terminal and matplotlib plots.
 
 ## Packages Required
 - tensorflow
