@@ -7,9 +7,9 @@ This project is the Applied Machine Learning Systems (AMLS) assignment, which fo
 - `main.py`: Main script that runs the project (tasks A and B).
 - `A/`:
    - `TaskACNN.py`: CNN implementation for Task A, including data preprocessing, CNN model developing, and evaluation for BreastMNIST.
-   - `TaskASVM.py`: SVM implementation for Task A, including data preprocessing, SVM model developing, and evaluation for BloodMNIST.
+   - `TaskASVM.py`: SVM implementation for Task A, including data preprocessing, SVM model developing, and evaluation for BreastMNIST.
 - `B/`: 
-   - `TaskBCNN.py`: CNN implementation for Task B, including data preprocessing, CNN model developing, and evaluation for BreastMNIST.
+   - `TaskBCNN.py`: CNN implementation for Task B, including data preprocessing, CNN model developing, and evaluation for BloodMNIST.
    - `TaskBSVM.py`: SVM implementation for Task B, including data preprocessing, SVM model developing, and evaluation for BloodMNIST.
 - `README.md`: Overview, setup instructions, and file descriptions.
 
