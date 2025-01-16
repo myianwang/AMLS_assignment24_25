@@ -4,13 +4,13 @@
 This project is the Applied Machine Learning Systems (AMLS) assignment, which focuses on implementing machine learning models to solve binary and multi-class classification tasks using the BreastMNIST and BloodMNIST datasets.
 
 ## File Descriptions
-- `main.py`: Main script that runs tasks A and B.
+- `main.py`: Main script that runs the project (tasks A and B).
 - `A/`:
-   - `TaskACNN.py`: CNN implementation for Task A.
-   - `TaskASVM.py`: SVM implementation for Task A.
+   - `TaskACNN.py`: CNN implementation for Task A, including data preprocessing, CNN model developing, and evaluation for BreastMNIST.
+   - `TaskASVM.py`: SVM implementation for Task A, including data preprocessing, SVM model developing, and evaluation for BloodMNIST.
 - `B/`: 
-   - `TaskBCNN.py`: CNN implementation for Task B.
-   - `TaskBSVM.py`: SVM implementation for Task B.
+   - `TaskBCNN.py`: CNN implementation for Task B, including data preprocessing, CNN model developing, and evaluation for BreastMNIST.
+   - `TaskBSVM.py`: SVM implementation for Task B, including data preprocessing, SVM model developing, and evaluation for BloodMNIST.
 - `README.md`: Overview, setup instructions, and file descriptions.
 
 ## Setup Instructions
@@ -24,6 +24,6 @@ python main.py
 
 ## Packages Required
 - tensorflow
-- scikit-learn
+- sklearn
 - medmnist
 - matplotlib
